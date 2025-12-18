@@ -15,3 +15,7 @@ class UserRepositoryDB(BaseUserRepository):
         self.db.add(user)
         await self.db.commit()
         await self.db.refresh(user) # DB에서 생성된 값(default 등)을 인스턴스에 반영
+
+    async def get_user_by_id(self, user_id: str) -> models.User:
+        result = await self.db.execute(select(models.User).where(models.User.user_id == user_id))
+        return result.scalars().first()

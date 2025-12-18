@@ -19,7 +19,6 @@ from openai import AsyncOpenAI
 
 
 app = FastAPI(title="Backend + AI Server",
-              root_path="/api",
               docs_url="/docs",
               redoc_url="/redoc",
               openapi_url="/openapi.json"

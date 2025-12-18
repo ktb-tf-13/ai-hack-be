@@ -12,7 +12,7 @@ class OnboardingRepository:
         result = await self.db.execute(select(OnboardingSession).where(OnboardingSession.session_id == session_id))
         return result.scalars().first()
 
-    async def create_session(self, session_id: str, user_id: Optional[int] = None) -> OnboardingSession:
+    async def create_session(self, session_id: str, user_id: Optional[str] = None) -> OnboardingSession:
         new_session = OnboardingSession(
             session_id=session_id,
             user_id=user_id,

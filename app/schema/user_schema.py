@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 
 #1. Payload 1: 회원 가입 (모든 정보 포함)
@@ -8,3 +8,14 @@ class UserCreate(BaseModel):
     password: str
     nickname: str
     img_id: str
+
+    @field_validator('user_id')
+    @classmethod
+    def convert_user_id_to_str(cls, v):
+        return str(v)
+
+class UserAnswerStatusResponse(BaseModel):
+    is_answered: bool
+
+class UserGoalResponse(BaseModel):
+    goal: str | None

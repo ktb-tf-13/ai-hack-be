@@ -14,12 +14,12 @@ except (ValueError, TypeError):
     print(f"⚠️ Invalid or missing DB_PORT: '{settings.db_port}'. Defaulting to 3306.")
     db_port = 3306
 
-db_name = 'tf13'
+db_name = settings.db_name
 if not db_name:
     print("WARNING: DB_NAME is missing. Using default 'tf13'")
     db_name = "tf13" 
 
-print(f"DEBUG: HOST={settings.db_host}, PORT={settings.db_port}, USER={settings.db_user}")
+print(f"DEBUG: HOST={settings.db_host}, PORT={settings.db_port}, USER={settings.db_user}, DB={db_name}")
 
 
 # MariaDB 연결 URL

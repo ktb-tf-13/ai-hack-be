@@ -14,7 +14,7 @@ FLUSH PRIVILEGES;
 
 -- User 테이블
 CREATE TABLE User (
-    user_id BIGINT NOT NULL AUTO_INCREMENT,
+    user_id VARCHAR(255) NOT NULL,
     user_name VARCHAR(255) NULL,
     is_answered BOOLEAN NOT NULL DEFAULT false,
     goal_content TEXT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE User (
 -- Challenge 테이블
 CREATE TABLE Challenge (
     challenge_id BIGINT NOT NULL AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
     challenge_content VARCHAR(255) NOT NULL,
     challenge_is_checked BOOLEAN NOT NULL DEFAULT false,
     challenge_date DATE NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE Challenge (
 -- Record 테이블
 CREATE TABLE Record (
     record_id BIGINT NOT NULL AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
     record_content VARCHAR(255) NULL,
     record_is_wrote BOOLEAN NOT NULL DEFAULT false,
     record_date DATE NOT NULL,
@@ -49,7 +49,7 @@ CREATE INDEX idx_record_user_date ON Record(user_id, record_date);
 -- 주간 리포트 테이블
 CREATE TABLE WeeklyReport (
     report_id BIGINT NOT NULL AUTO_INCREMENT,
-    user_id BIGINT NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
     year INT NOT NULL,
     week INT NOT NULL,
     summary TEXT NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE WeeklyReport (
 -- 온보딩 세션 테이블
 CREATE TABLE OnboardingSession (
     session_id VARCHAR(36) NOT NULL,
-    user_id BIGINT NULL,
+    user_id VARCHAR(255) NULL,
     current_step INT DEFAULT 0,
     history_data JSON NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

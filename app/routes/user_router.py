@@ -16,7 +16,7 @@ def get_user_repository(db: AsyncSession = Depends(get_db)):
     return UserRepositoryDB(db)
 
 
-router = APIRouter(tags=["사용자"], prefix="/user")
+router = APIRouter(tags=["사용자"], prefix="/users")
 
 @router.post("", response_model=common_schema.ApiResponse)
 async def create_user(request: user_schema.UserCreate, repo: BaseUserRepository = Depends(get_user_repository)) -> Any:
@@ -25,3 +25,13 @@ async def create_user(request: user_schema.UserCreate, repo: BaseUserRepository 
     response = common_schema.ApiResponse(success=True, message="회원가입이 성공적으로 완료되었습니다.") 
 
     return response
+
+@router.get("/{user_id}/answer-status", response_model=user_schema.UserAnswerStatusResponse)
+async def check_user_answer_status(user_id: str, repo: BaseUserRepository = Depends(get_user_repository)) -> Any:
+    is_answered = await user_service.get_user_answer_status(repo, user_id)
+    return user_schema.UserAnswerStatusResponse(is_answered=is_answered)
+
+@router.get("/{user_id}/goal", response_model=user_schema.UserGoalResponse)
+async def get_user_goal(user_id: str, repo: BaseUserRepository = Depends(get_user_repository)) -> Any:
+    goal = await user_service.get_user_goal(repo, user_id)
+    return user_schema.UserGoalResponse(goal=goal)

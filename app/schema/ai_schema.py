@@ -29,7 +29,7 @@ class OnboardingStepType(str, Enum):
 
 class OnboardingRequest(BaseModel):
     session_id: Optional[str] = Field(None, description="세션 ID (첫 요청 시 None)")
-    user_id: int = Field(..., description="유저 ID")
+    user_id: str = Field(..., description="유저 ID")
     answer: Optional[str] = Field(None, description="유저 응답 (선택지 텍스트 또는 입력한 목표)")
     step: Optional[int] = Field(None, description="현재 완료한 스텝 (1~10: 질문, 11: 목표입력)")
 

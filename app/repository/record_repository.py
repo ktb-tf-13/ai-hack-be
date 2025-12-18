@@ -8,7 +8,7 @@ class RecordRepository:
     def __init__(self, db: AsyncSession):
         self.db = db
 
-    async def get_recent_records(self, user_id: int, limit: int = 10) -> List[Record]:
+    async def get_recent_records(self, user_id: str, limit: int = 10) -> List[Record]:
         result = await self.db.execute(
             select(Record)
             .where(Record.user_id == user_id)

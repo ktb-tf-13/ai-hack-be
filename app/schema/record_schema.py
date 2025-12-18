@@ -3,7 +3,7 @@ from datetime import date
 
 # 요청 (Request)
 class RecordRequest(BaseModel):
-    user_id: int
+    user_id: str
     content: str
     date: date # "2025-12-17" 형태의 문자열을 자동으로 date 객체로 변환해줌
 
@@ -14,5 +14,5 @@ class RecordResponse(BaseModel):
     date: date
 
 class RecordSearchRequest(BaseModel):
-    user_id: int
+    user_id: str
     date: date
