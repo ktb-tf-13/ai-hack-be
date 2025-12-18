@@ -4,8 +4,18 @@ from sqlalchemy.orm import sessionmaker
 
 from app.config import settings
 
+# DB port validation
+try:
+    db_port = int(settings.db_port)
+except (ValueError, TypeError):
+    raise ValueError(
+        f"Invalid database port: '{settings.db_port}'. "
+        f"DB_PORT must be a valid number. Please check your .env file."
+    )
+
+
 # MariaDB 연결 URL
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{settings.db_user}:{settings.db_password}@{settings.db_host}:{settings.db_port}/{settings.db_name}"
+SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{settings.db_user}:{settings.db_password}@{settings.db_host}:3306/{settings.db_name}"
 
 # 연결 옵션 추가
 engine = create_engine(
