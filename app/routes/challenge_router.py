@@ -5,6 +5,8 @@ from app.schema.challenge_schema import (
     ChallengeCancelRequest,
     ChallengeDeleteRequest
 )
+from app.repository.db.db_challenge_repository import ChallengeRepositoryDB
+
 
 router = APIRouter()
 
