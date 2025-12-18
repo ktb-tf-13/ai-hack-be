@@ -50,6 +50,7 @@ jobs:
             -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
             -e DB_NAME=${{ secrets.DB_NAME }} \
             -e DB_PORT=3306 \
+            -e OPENAI_API_KEY=$'{{ secrets.OPENAI_API_KEY }}' \
             ${{ secrets.DOCKER_USERNAME }}/ktb-tf13-hack-be:latest
             
           echo "Waiting for server to stabilize..."
