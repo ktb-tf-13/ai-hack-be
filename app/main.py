@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Request, status
 from fastapi import APIRouter
 from app.routes import user_router
+from app.routes import challenge_router
+
 import logging
 from fastapi.exceptions import RequestValidationError
 import app.schema.common_schema as common_schema
@@ -11,7 +13,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from openai import AsyncOpenAI
-from app.routes import challenge_router
 
 
 app = FastAPI(title="Backend + AI Server",

@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.schemas.challenge_schema import ChallengeRequest
+from app.schema.challenge_schema import ChallengeRequest
 
 router = APIRouter()
 
