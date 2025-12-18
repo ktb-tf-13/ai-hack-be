@@ -46,6 +46,8 @@ jobs:
             --name fastapi-app \
             -p 8000:8000 \
             -e DB_URL=${{ secrets.DB_URL }} \
+            -e DB_USER=${{ secrets.DB_USER }} \
+            -e DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
             ${{ secrets.DOCKER_USERNAME }}/ktb-tf13-hack-be:latest
             
           sudo docker image prune -f
