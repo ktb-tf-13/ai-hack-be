@@ -13,9 +13,9 @@ from pydantic import BaseModel
 from openai import AsyncOpenAI
 
 app = FastAPI(title="Backend + AI Server",
-              docs_url="/api/docs",
-              redoc_url="/api/redoc",
-              openapi_url="/api/openapi.json"
+              docs_url="/docs",
+              redoc_url="/redoc",
+              openapi_url="/api/api/openapi.json"
             )
 
 logging.basicConfig(
