@@ -11,3 +11,6 @@ python-multipart
 openai
 asyncmy
 aiomysql
+langchain
+angchain-openai
+greenlet
