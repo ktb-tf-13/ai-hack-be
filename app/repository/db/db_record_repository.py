@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import select
+from sqlalchemy import select, exists
 import app.model.models as models
 from app.schema.record_schema import RecordRequest
 
