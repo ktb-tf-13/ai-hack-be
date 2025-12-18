@@ -23,7 +23,7 @@ class RecordRepositoryDB:
         if existing_record:
             # [CASE 1] 업데이트
             existing_record.record_content = request.content
-            existing_record.record_is_written = True
+            existing_record.record_is_wrote = True
             
             await self.db.commit()
             await self.db.refresh(existing_record)
