@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schema.record_schema import RecordRequest, RecordSearchRequest
-from app.repository.db_record_repository import RecordRepositoryDB
+from app.repository.db.db_record_repository import RecordRepositoryDB
 
 router = APIRouter()
 
