@@ -35,7 +35,7 @@ class RecordRepositoryDB:
                 user_id=request.user_id,
                 record_content=request.content,
                 record_date=request.date,
-                record_is_written=True
+                record_is_wrote=True
             )
             
             # 주의: db.add()는 동기 메서드라 await 안 붙임 (SQLAlchemy 특성)
