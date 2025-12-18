@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pathlib import Path
+from typing import Optional
 
 class Settings(BaseSettings):
     # Server configs
@@ -15,7 +16,12 @@ class Settings(BaseSettings):
     db_type: str = "csv"
     csv_data_path: str = "temp_table"
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    db_url: Optional[str] = None 
+
+    model_config = SettingsConfigDict(
+        env_file=".env", 
+        env_file_encoding="utf-8"
+    )
 
 settings = Settings()
 
