@@ -4,3 +4,9 @@ from pydantic import BaseModel
 class ChallengeRequest(BaseModel):
     user_id: int
     date: str
+
+class ChallengeCompleteRequest(BaseModel):
+    id: int
+
+class ChallengeCancelRequest(BaseModel):
+    id: int
