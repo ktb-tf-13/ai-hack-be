@@ -1,0 +1,47 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ "main" ]
+    workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
+        script: |
+          # 1. 프로젝트 디렉토리로 이동 (없으면 클론)
+          # 'backend' 부분은 실제 EC2의 리포지토리 이름/경로에 맞게 수정 필요
+          mkdir -p ~/app
+          cd ~/app/backend
+
+          # 2. 최신 코드 가져오기
+          git pull origin main
+
+          # 3. .env 파일 생성 (Secrets 사용)
+          cat <<EOF > .env
+          DB_USER=${{ secrets.DB_USER }}
+          DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+          DB_HOST=${{ secrets.DB_HOST }}
+          DB_PORT=3306
+          DB_NAME=${{ secrets.DB_NAME }}
+          EOF
+
+          # 4. Docker Compose로 서비스 재실행 (이미지 리빌드 포함)
+          # -f 옵션으로 프로덕션용 파일 지정
+          docker compose -f docker-compose.prod.yml down
+          docker compose -f docker-compose.prod.yml up -d --build
+          
+          # 5. 불필요한 이미지 정리
+          docker image prune -f
