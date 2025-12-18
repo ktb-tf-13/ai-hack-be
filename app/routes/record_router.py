@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schema.record_schema import RecordRequest, RecordSearchRequest
 from app.repository.db.db_record_repository import RecordRepositoryDB
+from app.core.exception import CustomException, ErrorCode
 
 router = APIRouter()
 
@@ -10,7 +11,14 @@ router = APIRouter()
 def write_record(request: RecordRequest, db: Session = Depends(get_db)):
     repo = RecordRepositoryDB(db)
     
-    # Upsert 실행
+    # [방어 로직] 유저가 존재하는지 먼저 확인!
+    if not repo.check_user_exists(request.user_id):
+        # 유저가 없으면 에러
+        raise CustomException(
+            code=ErrorCode.USER_NOT_FOUND, # 아까 정의한 코드
+            message=f"ID가 {request.user_id}인 사용자를 찾을 수 없습니다."
+        )
+
     result_record = repo.upsert_record(request)
     
     return {
@@ -29,8 +37,12 @@ def get_record(request: RecordSearchRequest, db: Session = Depends(get_db)):
     
     # 기록이 없을 경우 예외 처리 (404 Not Found)
     if not record:
-        raise HTTPException(status_code=404, detail="해당 날짜의 기록을 찾을 수 없습니다.")
-    
+        return {
+            "id": None,          # ID가 없으므로 null 반환
+            "content": "",       # 요청하신 대로 빈 문자열
+            "date": request.date # 요청한 날짜는 그대로 돌려줌 (프론트 편의성)
+        }
+
     # 기록이 있으면 응답 반환
     return {
         "id": record.record_id,

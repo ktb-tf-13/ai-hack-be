@@ -7,6 +7,11 @@ class RecordRepositoryDB:
     def __init__(self, db: Session):
         self.db = db
 
+    # 유저 존재 여부 확인
+    def check_user_exists(self, user_id: int) -> bool:
+        stmt = select(exists().where(models.User.user_id == user_id))
+        return self.db.execute(stmt).scalar()
+
     def upsert_record(self, request: RecordRequest):
         # 해당 유저의 해당 날짜 기록이 있는지 조회
         stmt = select(models.Record).where(
