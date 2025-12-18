@@ -13,4 +13,4 @@ COPY . .
 
 # 5. 서버 실행 명령어 
 # --host 0.0.0.0 은 외부 접속을 허용
-CMD ["uvicorn", "service.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
