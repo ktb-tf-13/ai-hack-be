@@ -10,3 +10,6 @@ class ChallengeCompleteRequest(BaseModel):
 
 class ChallengeCancelRequest(BaseModel):
     id: int
+
+class ChallengeDeleteRequest(BaseModel):
+    id: int
