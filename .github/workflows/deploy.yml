@@ -54,5 +54,3 @@ jobs:
             
           echo "Waiting for server to stabilize..."
           sleep 10
-
-          sudo docker exec fastapi-app alembic upgrade head
