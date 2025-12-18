@@ -15,6 +15,14 @@ except (ValueError, TypeError):
     print(f"⚠️ Invalid or missing DB_PORT: '{settings.db_port}'. Defaulting to 3306.")
     db_port = 3306
 
+db_name = settings.db_name
+if not db_name:
+    print("WARNING: DB_NAME is missing. Using default 'tf13' or 'backend'.")
+    # 🔥 여기에 실제 RDS에 만들어둔 DB 이름을 문자열로 적으세요!
+    # 예: "backend", "mydb", "tf13" 등 
+    # (로그에 USER가 tf13인 걸 보니 DB 이름도 tf13일 가능성이 높습니다)
+    db_name = "tf13" 
+
 print(f"DEBUG: HOST={settings.db_host}, PORT={settings.db_port}, USER={settings.db_user}")
 
 
