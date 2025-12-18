@@ -11,6 +11,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from openai import AsyncOpenAI
+from app.routes import challenge_router  # [추가] 위에서 만든 라우터 import
+
 
 app = FastAPI(title="Backend + AI Server",
               root_path="/api",
@@ -86,5 +88,7 @@ app.add_middleware(
 
 api_router = APIRouter()
 api_router.include_router(router=user_router.router)
+app.include_router(challenge_router.router)
+
 
 app.include_router(api_router)
