@@ -10,6 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # 4. 전체 코드 복사
 COPY . .
+ENV PYTHONPATH=/app
 
 # 5. 서버 실행 명령어 
 # --host 0.0.0.0 은 외부 접속을 허용
