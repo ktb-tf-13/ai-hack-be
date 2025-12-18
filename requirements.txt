@@ -12,5 +12,5 @@ openai
 asyncmy
 aiomysql
 langchain
-angchain-openai
+langchain-openai
 greenlet
