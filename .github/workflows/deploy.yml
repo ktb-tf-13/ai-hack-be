@@ -54,3 +54,5 @@ jobs:
             
           echo "Waiting for server to stabilize..."
           sleep 10
+
+          sudo docker system prune -f
