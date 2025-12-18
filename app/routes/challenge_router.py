@@ -11,6 +11,8 @@ router = APIRouter()
 @router.post("/challenges")
 def get_challenges(request: ChallengeRequest):
     
+    # 로직
+
     # 들어온 요청 값(request.user_id 등)을 로그로 확인해볼 수 있습니다.
     print(f"DEBUG: 요청 들어옴 - user_id: {request.user_id}, date: {request.date}")
 
@@ -59,7 +61,7 @@ def complete_challenge(request: ChallengeCancelRequest):
     }
 
 # 챌린지 삭제
-@router.post("/users/challenges/delete")
+@router.delete("/users/challenges/delete")
 def delete_challenge(request: ChallengeDeleteRequest):
     
     print(f"DEBUG: 챌린지 삭제 요청됨 - ID: {request.id}")
