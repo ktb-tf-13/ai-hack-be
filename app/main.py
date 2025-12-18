@@ -12,7 +12,11 @@ from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from openai import AsyncOpenAI
 
-app = FastAPI(title="Backend + AI Server")
+app = FastAPI(title="Backend + AI Server",
+              docs_url="/api/docs",
+              redoc_url="/api/redoc",
+              openapi_url="/api/openapi.json"
+            )
 
 logging.basicConfig(
     level=logging.INFO,  # 로그 레벨을 INFO로 설정
