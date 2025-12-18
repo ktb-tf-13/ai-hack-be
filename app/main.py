@@ -1,5 +1,4 @@
 from fastapi import FastAPI, Request, status
-from .config import server_config
 from fastapi import APIRouter
 from app.routes import user_router
 import logging
