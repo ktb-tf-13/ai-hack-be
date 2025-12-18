@@ -6,7 +6,7 @@ from app.repository.db_record_repository import RecordRepositoryDB
 
 router = APIRouter()
 
-@router.post("/records")
+@router.put("/records")
 def write_record(request: RecordRequest, db: Session = Depends(get_db)):
     repo = RecordRepositoryDB(db)
     
@@ -19,8 +19,8 @@ def write_record(request: RecordRequest, db: Session = Depends(get_db)):
         "date": result_record.record_date
     }
 
-#기록 조회 (GET)
-@router.get("/records")
+#기록 조회 
+@router.post("/records")
 def get_record(request: RecordSearchRequest, db: Session = Depends(get_db)):
     repo = RecordRepositoryDB(db)
     
