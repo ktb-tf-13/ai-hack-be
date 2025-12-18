@@ -30,7 +30,7 @@ def get_challenges(request: ChallengeRequest):
     }
 
 # 챌린지 완료
-@router.post("/users/challenges/complete")
+@router.post("/challenges/complete")
 def complete_challenge(request: ChallengeCompleteRequest):
     
     print(f"DEBUG: 챌린지 완료 요청됨 - ID: {request.id}")
@@ -42,7 +42,7 @@ def complete_challenge(request: ChallengeCompleteRequest):
     }
 
 # 챌린지 완료 취소
-@router.post("/users/challenges/cancel")
+@router.post("/challenges/cancel")
 def complete_challenge(request: ChallengeCancelRequest):
     
     print(f"DEBUG: 챌린지 실패 요청됨 - ID: {request.id}")
