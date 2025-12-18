@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from pydantic import Field
 from pathlib import Path
+from typing import Optional
 
 class Settings(BaseSettings):
     # Server configs
@@ -18,6 +19,11 @@ class Settings(BaseSettings):
     # LLM
     openai_api_key: str = Field(default="", alias="OPENAI_API_KEY")
 
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    db_url: Optional[str] = None 
+
+    model_config = SettingsConfigDict(
+        env_file=".env", 
+        env_file_encoding="utf-8"
+    )
 
 settings = Settings()

@@ -2,7 +2,7 @@
 
 ## 🏗️ 아키텍처
 - **Backend**: FastAPI (Python)
-- **Database**: MariaDB
+- **Database**: MySQL
 - **Package Manager**: uv
 
 ## 🛠️ 환경 구성 (Environment Setup)
@@ -13,8 +13,10 @@
 cp .env.example .env
 ```
 
-### 2. 데이터베이스 실행 (Docker)
-MariaDB 컨테이너를 실행합니다. (`init.sql`이 자동으로 실행되어 초기 데이터를 생성합니다.)
+### ~~2. 데이터베이스 실행 (Docker)~~
+DB를 별도의 EC2 인스턴스로 분리하였습니다.
+
+~~MariaDB 컨테이너를 실행합니다. (`init.sql`이 자동으로 실행되어 초기 데이터를 생성합니다.)~~
 ```bash
 docker compose -f docker-compose.yml up -d
 ```

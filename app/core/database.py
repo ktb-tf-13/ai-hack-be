@@ -3,8 +3,27 @@ from sqlalchemy.orm import declarative_base
 
 from app.config import settings
 
-# MariaDB 연결 URL (비동기 드라이버 aiomysql 사용)
-SQLALCHEMY_DATABASE_URL = f"mysql+aiomysql://{settings.db_user}:{settings.db_password}@{settings.db_host}:{settings.db_port}/{settings.db_name}"
+try:
+    # 값이 있으면 정수로 변환 시도
+    if settings.db_port:
+        db_port = int(settings.db_port)
+    else:
+        # 값이 비어있으면('') 강제로 에러를 내서 except로 보냄
+        raise ValueError 
+except (ValueError, TypeError):
+    print(f"⚠️ Invalid or missing DB_PORT: '{settings.db_port}'. Defaulting to 3306.")
+    db_port = 3306
+
+db_name = 'tf13'
+if not db_name:
+    print("WARNING: DB_NAME is missing. Using default 'tf13'")
+    db_name = "tf13" 
+
+print(f"DEBUG: HOST={settings.db_host}, PORT={settings.db_port}, USER={settings.db_user}")
+
+
+# MariaDB 연결 URL
+SQLALCHEMY_DATABASE_URL = f"mysql+aiomysql://{settings.db_user}:{settings.db_password}@{settings.db_host}:{db_port}/{db_name}"
 
 # 비동기 엔진 생성
 engine = create_async_engine(

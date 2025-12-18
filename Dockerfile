@@ -1,27 +1,17 @@
-FROM python:3.12-slim-bookworm
+# 1. Python 3.11 슬림 버전 사용
+FROM python:3.11-slim
 
-# The installer requires curl (and certificates) to download the release archive
-RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certificates
-
-# Download the latest installer
-ADD https://astral.sh/uv/install.sh /uv-installer.sh
-
-# Run the installer then remove it
-RUN sh /uv-installer.sh && rm /uv-installer.sh
-
-# Ensure the installed binary is on the `PATH`
-ENV PATH="/root/.local/bin/:$PATH"
-
+# 2. 작업 디렉토리 설정
 WORKDIR /app
 
-# Copy dependency files first
-COPY pyproject.toml uv.lock ./
+# 3. 의존성 파일 복사 및 설치
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies (frozen lockfile)
-RUN uv sync --frozen --no-install-project
-
-# Copy the rest of the application
+# 4. 전체 코드 복사
 COPY . .
+ENV PYTHONPATH=/app
 
-# Run the application
-CMD ["uv", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# 5. 서버 실행 명령어 
+# --host 0.0.0.0 은 외부 접속을 허용
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
