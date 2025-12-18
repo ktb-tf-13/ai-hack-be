@@ -3,5 +3,5 @@ from app.model.models import User
 
 class BaseUserRepository(ABC):
     @abstractmethod
-    def insert_user(self, user: User):
+    async def insert_user(self, user: User):
         pass
