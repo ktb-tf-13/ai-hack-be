@@ -8,7 +8,7 @@ class Base(DeclarativeBase):
 # --- User 테이블 ---
 class User(Base):
     __tablename__ = "User"
-    user_id = Column(String(50), primary_key=True)
+    user_id = Column(BigInteger, primary_key=True, autoincrement=True)
     password = Column(String(255), nullable=False)
     nickname = Column(String(100), nullable=False) # UNIQUE 제약조건 제거
     img_id = Column(String(50)) # 외래키 정보 제거
