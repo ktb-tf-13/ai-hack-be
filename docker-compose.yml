@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  db:
+    image: mariadb:latest
+    container_name: mariadb-db
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      TZ: Asia/Seoul
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+
+volumes:
+  mariadb_data:
