@@ -61,20 +61,3 @@ def complete_challenge(request: ChallengeCancelRequest):
         "id": request.id,
         "is_checked": False
     }
-
-# 챌린지 삭제
-@router.delete("/users/challenges/delete")
-def delete_challenge(request: ChallengeDeleteRequest):
-    
-    print(f"DEBUG: 챌린지 삭제 요청됨 - ID: {request.id}")
-
-    # 나중에 실제 DB 연결 시:
-    # 1. db.query(Challenge).filter(Challenge.id == request.id).delete()
-    # 2. db.commit()
-    
-    # 지금은 더미 데이터 반환
-    return {
-        "id": request.id,
-        "is_deleted": True,
-        "message": "챌린지가 성공적으로 삭제되었습니다."
-    }
