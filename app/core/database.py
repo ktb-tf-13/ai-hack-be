@@ -24,7 +24,7 @@ print(f"DEBUG: HOST={settings.db_host}, PORT={settings.db_port}, USER={settings.
 
 
 # MariaDB 연결 URL
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{settings.db_user}:{settings.db_password}@{settings.db_host}:{db_port}/{settings.db_name}"
+SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://{settings.db_user}:{settings.db_password}@{settings.db_host}:{db_port}/{db_name}"
 
 # 연결 옵션 추가
 engine = create_engine(
