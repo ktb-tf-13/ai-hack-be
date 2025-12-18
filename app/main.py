@@ -1,8 +1,11 @@
 from fastapi import FastAPI, Request, status
 from fastapi import APIRouter
-from app.routes import user_router
+
+from app.routes import user_router, ai_router
+
 from app.routes import challenge_router
 from app.routes import record_router
+
 import logging
 from fastapi.exceptions import RequestValidationError
 import app.schema.common_schema as common_schema
@@ -89,7 +92,10 @@ app.add_middleware(
 
 api_router = APIRouter()
 api_router.include_router(router=user_router.router)
+
+api_router.include_router(router=ai_router.router)
 api_router.include_router(router=challenge_router.router)
 api_router.include_router(router=record_router.router)
+
 
 app.include_router(api_router)

@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     db_host: str = Field(default="localhost", alias="DB_HOST")
     db_port: int = Field(default=3306, alias="DB_PORT")
     db_name: str = Field(default="backend", alias="DB_NAME")
+    
+    # LLM
+    openai_api_key: str = Field(default="", alias="OPENAI_API_KEY")
 
     db_url: Optional[str] = None 
 
